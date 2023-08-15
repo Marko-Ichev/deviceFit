@@ -16,7 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("", views.index, name="index"),
+    path("login/", admin.site.login, name="login"),
+    path("logout/", admin.site.logout, name="logout"),
+    path("products/", views.products, name="products"),
+    path("category/<str:slug>/", views.category, name="category"),
+    path("cart/", views.cart, name="cart"),
+    path("admin/", admin.site.urls, name="admin"),
+    path("profile/", views.profile, name="profile"),
+    path("add_to_cart/<str:slug>/", views.add_to_cart, name="add_to_cart"),
+    path(
+        "remove_from_cart/<str:slug>/", views.remove_from_cart, name="remove_from_cart"
+    ),
+    path("checkout/", views.checkout, name="checkout"),
+    path("empty_cart/", views.empty_cart, name="empty_cart"),
+    path("product/<str:slug>", views.product, name="product"),
+    path("post_review/<str:slug>", views.post_review, name="post_review"),
+    *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+    path("owned_programs/", views.owned_programs_list, name="owned_programs_list"),
 ]

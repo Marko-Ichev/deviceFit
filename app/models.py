@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-
 class UserInformation(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=255)
@@ -18,7 +17,6 @@ class UserInformation(models.Model):
     def __str__(self) -> str:
         return f"{self.nickname} ({self.user!r})"
 
-
 class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True, default="")
@@ -28,7 +26,6 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -49,21 +46,6 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
-class Review(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
-    text = models.TextField()
-    rating = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(10)]
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self) -> str:
-        return f"{self.user}'s review for {self.product}"
-
-
 class Cart(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     products = models.ManyToManyField(to=Product, through="ProductInCart")
@@ -73,7 +55,6 @@ class Cart(models.Model):
     def __str__(self) -> str:
         return f"{self.user}'s cart"
     
-
 class ProductInCart(models.Model):
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)
@@ -84,7 +65,6 @@ class ProductInCart(models.Model):
 
     def __str__(self) -> str:
         return f"{self.product} ({self.quantity})"
-
 
 class Order(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -107,7 +87,19 @@ class ProductInOrder(models.Model):
 
     def __str__(self) -> str:
         return f"{self.product} ({self.quantity})"
+    
+class Review(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    text = models.TextField()
+    rating = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)]
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self) -> str:
+        return f"{self.user}'s review for {self.product}"
 
 class OwnedProgram(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
