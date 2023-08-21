@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
                 ('address', models.CharField(max_length=255)),
                 ('phone_number', models.CharField(max_length=255)),
                 ('email', models.EmailField(max_length=255)),
-                ('image', models.ImageField(upload_to='images/')),
+                ('avatar', models.ImageField(upload_to='avatars/')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={

@@ -9,7 +9,7 @@ class UserInformation(models.Model):
     address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
-    image = models.ImageField(upload_to="images/")
+    avatar = models.ImageField(upload_to="avatars/")
 
     class Meta:
         verbose_name_plural = "User's information"

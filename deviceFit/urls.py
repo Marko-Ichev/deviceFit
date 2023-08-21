@@ -37,6 +37,6 @@ urlpatterns = [
     path("empty_cart/", views.empty_cart, name="empty_cart"),
     path("product/<str:slug>", views.product, name="product"),
     path("post_review/<str:slug>", views.post_review, name="post_review"),
-    *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     path("owned_programs/", views.owned_programs_list, name="owned_programs_list"),
+    *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]

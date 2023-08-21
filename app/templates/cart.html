@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+    <h3 class="text-center my-5">
+        <span class="bg-primary text-white rounded-pill py-2 px-3 d-inline-block mx-auto">
+            Your Shopping Cart
+        </span>
+    </h3>
+    <ul class="list-group">
+        {% if cart|length == 0 %}
+        <h5 class="alert alert-danger text-center py-4 rounded-lg">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            Your cart is empty. Add items to start shopping!
+        </h5>
+        {% else %}
+        <li class="list-group-item" key="{p.id}">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-5 my-auto fs-4 fw-bold">Name</div>
+                <div class="col-1 my-auto fs-4 fw-bold">Quantity</div>
+                <div class="col-4 g-col-3 d-flex flex-column align-items-end">
+                    <div class="col-1 my-auto fs-4 me-5 fw-bold">Price</div>
+                </div>
+            </div>
+        </li>
+        {% for product in cart %}
+        <li class="list-group-item" key="{p.id}">
+            <div class="row">
+                <div class="col-2">
+                    <img src="{{ product.product.image.url }}" alt="{{ product.product.name }}"
+                        class="img-fluid img-thumbnail" style="max-height: 10vh" />
+                </div>
+                <div class="col-5 my-auto fs-4">{{ product.product.name }}</div>
+                <div class="col-1 my-auto">
+                    <div class="badge">
+                        <span class="badge fs-5 bg-peach bg-darkGray darkGrayBorder">{{ product.quantity }}</span>
+                    </div>
+                </div>
+                <div class="col-4 g-col-3 d-flex flex-column align-items-end">
+                    <div class="col-1 my-auto fs-4 me-5">
+                        ${{ product.product.price }}
+                    </div>
+                    <div class="col-1 my-auto fs-4 me-5">
+                        <button id="{{ product.product.slug }}" type="button" class="btn btn-danger remove-from-cart">
+                            <i class="fas fa-trash-alt me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %} {% endif %}
+    </ul>
+    <div class="row mt-3">
+        <div class="d-flex justify-content-center gap-5">
+            <a href="/" class="btn btn-outline-secondary btn-lg bg-darkGray bg-hoverPeach">
+                <i class="fas fa-arrow-left me-2"></i> Continue Shopping
+              </a>
+            {% if cart|length == 0 %}
+            <a href="/checkout" class="btn btn-success btn-lg disabled">
+                <i class="fas fa-shopping-cart me-2"></i> Checkout
+            </a>
+            {% else %}
+            <a href="/checkout" class="btn btn-primary btn-lg bg-greenish bg-hoverPeach">
+                <i class="fas fa-check-circle me-2"></i> Proceed to Checkout
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

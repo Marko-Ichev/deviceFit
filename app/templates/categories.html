@@ -1,0 +1,33 @@
+<!-- <div class="dropdown">
+    <a
+        class="nav-link dropdown-toggle text-white"
+        href="#"
+        role="button"
+        data-bs-toggle="dropdown"
+    >
+        Categories
+    </a>
+    <ul class="dropdown-menu">
+        {% for category in categories %}
+        <li key="{{ category.name }}">
+            <a href="/category/{{ category.slug }}" class="dropdown-item">
+                {{ category.name }}
+            </a>
+            <hr class="dropdown-divider" />
+        </li>
+        {% endfor %}
+    </ul>
+</div> -->
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="categoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Categories
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+        {% for category in categories %}
+        <li>
+            <a class="dropdown-item" href="/category/{{ category.slug }}">{{ category.name }}</a>
+            <hr class="dropdown-divider" />
+        </li>
+        {% endfor %}
+    </ul>
+</div>

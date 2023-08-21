@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block content %}
+<div class="d-flex mt-5">
+    <div class="m-5">
+        <img
+            src="{{ product.image.url }}"
+            alt="{{ product.name }}"
+            class="img-fluid rounded shadow-lg thumbnail"
+            style="height: 100%"
+        />
+    </div>
+    <div>
+        <div class="mb-5 pb-5">
+            <h1>{{ product.name }}</h1>
+            <p class="fw-bold">Description: {{ product.description }}</p>
+            <p class="fw-bold">Seller: {{ product.user.username }}</p>
+        </div>
+        <div class="pt-5 mt-5">
+            <div class="d-flex justify-content-between">
+                <h4 class="text-success">${{ product.price }}</h4>
+            </div>
+            <button
+                id="{{ product.slug }}"
+                class="btn btn-secondary rounded add-to-cart"
+                data-bs-toggle="tooltip"
+                data-bs-trigger="manual"
+                data-bs-placement="top"
+                data-bs-title="Added to cart!"
+                data-bs-target="#added-to-cart"
+                type="button"
+                {% if not user.is_authenticated %} disabled {% endif %}
+            >
+                {% if not user.is_authenticated %} Login to Add to Cart {% else %}
+                Add to Cart
+                {% endif %}
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="text-center d-flex flex-column justify-content-center align-items-center gap-3"
+>
+    <h2 class="mt-3">Add a review</h2>
+    <textarea
+        class="form-control comment"
+        style="width: 20rem"
+        class="mb-5"
+        placeholder="Write a review..."
+    ></textarea>
+    <input
+        class="form-control rating"
+        name="rating"
+        type="number"
+        min="1"
+        max="10"
+        style="width: 7.5rem"
+        placeholder="Rating"
+    />
+    <button
+        id="{{ product.slug }}"
+        type="button"
+        class="btn btn-primary add-review"
+    >
+        Submit
+    </button>
+</div>
+<div
+    class="text-center d-flex flex-column justify-content-center align-items-center gap-5 my-5"
+>
+    <h2 class="text-center">Reviews</h2>
+    {% if reviews|length == 0 %}
+    <h4>No reviews yet :(</h4>
+    {% endif %} {% for review in reviews %}
+    <div class="bg-secondary text-start rounded p-3 border border-dark text-white">
+        <p>From: {{ review.user.username }}</p>
+        <p>Comment: {{ review.text }}</p>
+        <p>Rating: {{ review.rating }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

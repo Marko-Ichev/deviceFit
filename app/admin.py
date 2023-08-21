@@ -3,7 +3,7 @@ from . import models
 from django.http.request import HttpRequest
 
 
-class UserInformationAdmin(admin.ModelAdmin[models.UserInformation]):
+class UserInformationAdmin(admin.ModelAdmin):
     list_display = ["nickname", "user"]
     search_fields = ["nickname", "user__username", "user__email"]
 
@@ -30,7 +30,7 @@ class UserInformationAdmin(admin.ModelAdmin[models.UserInformation]):
         return request.user.is_authenticated
 
 
-class CategoryAdmin(admin.ModelAdmin[models.Category]):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ["name", "slug"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "slug"]
@@ -54,7 +54,7 @@ class CategoryAdmin(admin.ModelAdmin[models.Category]):
         return request.user.is_authenticated
 
 
-class ProductAdmin(admin.ModelAdmin[models.Product]):
+class ProductAdmin(admin.ModelAdmin):
     list_display = ["name", "price"]
     prepopulated_fields = {"slug": ["name"]}
     list_filter = ["category", "user"]
@@ -79,7 +79,7 @@ class ProductAdmin(admin.ModelAdmin[models.Product]):
         return request.user.is_authenticated
 
 
-class CartAdmin(admin.ModelAdmin[models.Cart]):
+class CartAdmin(admin.ModelAdmin):
     list_display = ["user"]
     search_fields = ["user__username"]
 
@@ -102,7 +102,7 @@ class CartAdmin(admin.ModelAdmin[models.Cart]):
         return request.user.is_authenticated
 
 
-class ProductInCartAdmin(admin.ModelAdmin[models.ProductInCart]):
+class ProductInCartAdmin(admin.ModelAdmin):
     list_display = ["cart", "product", "quantity"]
     search_fields = ["cart__user__username", "product__name"]
 
@@ -125,7 +125,7 @@ class ProductInCartAdmin(admin.ModelAdmin[models.ProductInCart]):
         return request.user.is_authenticated
 
 
-class OrderAdmin(admin.ModelAdmin[models.Order]):
+class OrderAdmin(admin.ModelAdmin):
     list_display = ["user"]
     search_fields = ["user__username", "products__name"]
 
@@ -148,7 +148,7 @@ class OrderAdmin(admin.ModelAdmin[models.Order]):
         return request.user.is_authenticated
 
 
-class ProductInOrderAdmin(admin.ModelAdmin[models.ProductInOrder]):
+class ProductInOrderAdmin(admin.ModelAdmin):
     list_display = ["order", "product", "quantity"]
     search_fields = ["order__user__username", "product__name"]
 
@@ -171,7 +171,7 @@ class ProductInOrderAdmin(admin.ModelAdmin[models.ProductInOrder]):
         return request.user.is_authenticated
     
 
-class ReviewAdmin(admin.ModelAdmin[models.Review]):
+class ReviewAdmin(admin.ModelAdmin):
     list_display = ["user", "product", "rating"]
     list_filter = ["user", "product", "rating"]
     search_fields = ["user__username", "product__name", "product__description"]
