@@ -5,14 +5,14 @@
             src="{{ product.image.url }}"
             alt="{{ product.name }}"
             class="img-fluid rounded shadow-lg thumbnail"
-            style="height: 100%"
+            style="height: 80%"
         />
     </div>
     <div>
         <div class="mb-5 pb-5">
             <h1>{{ product.name }}</h1>
-            <p class="fw-bold">Description: {{ product.description }}</p>
-            <p class="fw-bold">Seller: {{ product.user.username }}</p>
+            <p class="fw-bold bg-darkGray">Description: {{ product.description }}</p>
+            <p class="fw-bold bg-darkGray">Published by: {{ product.user.username }}</p>
         </div>
         <div class="pt-5 mt-5">
             <div class="d-flex justify-content-between">
@@ -39,7 +39,7 @@
 <div
     class="text-center d-flex flex-column justify-content-center align-items-center gap-3"
 >
-    <h2 class="mt-3">Add a review</h2>
+    <h2 class="mt-3 bg-darkGray">Add a review</h2>
     <textarea
         class="form-control comment"
         style="width: 20rem"
@@ -66,11 +66,11 @@
 <div
     class="text-center d-flex flex-column justify-content-center align-items-center gap-5 my-5"
 >
-    <h2 class="text-center">Reviews</h2>
+    <h2 class="text-center text-decoration-underline">Reviews</h2>
     {% if reviews|length == 0 %}
     <h4>No reviews yet :(</h4>
     {% endif %} {% for review in reviews %}
-    <div class="bg-secondary text-start rounded p-3 border border-dark text-white">
+    <div class="text-start rounded p-3 border border-dark bg-peach">
         <p>From: {{ review.user.username }}</p>
         <p>Comment: {{ review.text }}</p>
         <p>Rating: {{ review.rating }}</p>

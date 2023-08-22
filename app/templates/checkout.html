@@ -1,9 +1,8 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 
 <h3 class="text-center my-5">
-    <span
-        class="text-decoration-underline rounded-pill py-1 px-2 d-inline-block mx-auto"
-    >
+    <span class="text-decoration-underline rounded-pill py-1 px-2 d-inline-block mx-auto">
         Checkout
     </span>
 </h3>
@@ -29,11 +28,35 @@
         <input class="form-control mt-1" type="text" id="expiration" />
 
         <div class="d-flex justify-content-center mt-3">
-            <button type="button" class="btn btn-success proceed">
+            <button type="button" class="btn btn-success proceed" disabled>
                 <a class="text-decoration-none text-white" href="/?result=Thank you for your purchase!">Proceed</a>
             </button>
         </div>
     </div>
 </div>
 
+<script>
+    const formFields = document.querySelectorAll('.form-control');
+    const proceedButton = document.querySelector('.proceed');
+
+    formFields.forEach(field => {
+        field.addEventListener('input', () => {
+            if (validateForm()) {
+                proceedButton.removeAttribute('disabled');
+            } else {
+                proceedButton.setAttribute('disabled', 'disabled');
+            }
+        });
+    });
+
+    function validateForm() {
+        let isFormValid = true;
+        formFields.forEach(field => {
+            if (field.value.trim() === '') {
+                isFormValid = false;
+            }
+        });
+        return isFormValid;
+    }
+</script>
 {% endblock %}
