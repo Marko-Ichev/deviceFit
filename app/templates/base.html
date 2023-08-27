@@ -11,6 +11,25 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"
         defer></script>
     <style>
+
+.card {
+    height: 600px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card img {
+    height: auto;
+    max-height: 50%;
+  }
+  
+  .card .card-body {
+    flex: 1;
+  }
+
+        .img-fluid {
+        object-fit: cover;
+    }
         body {
             background-color: #89cff0;
             background-image: url("https://www.transparenttextures.com/patterns/connected.png");
@@ -44,8 +63,14 @@
     .darkGrayBorder {
         border: 2px solid #2E3033;
     }
+
     .buttonClicked:active{
     background-color: #00FF7F;
+    }
+
+    .imgSort{
+    height: 500px;
+    width: 330px;
     }
     </style>
     <script>

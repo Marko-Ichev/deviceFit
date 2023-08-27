@@ -203,6 +203,6 @@ def post_review(request: HttpRequest, slug: str) -> HttpResponse:
 
     return JsonResponse({"success": True})
 
-def owned_programs_list(request):
+def owned_programs(request):
     owned_programs = OwnedProgram.objects.all()
-    return render(request, "app/owned_programs_list.html", {"owned_programs": owned_programs})
+    return render(request, "owned_programs.html", {"owned_programs": owned_programs})
